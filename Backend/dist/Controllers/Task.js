@@ -21,9 +21,7 @@ const getAllTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     try {
         const pool = yield (0, connect_db_1.connectDB)();
         const tasks = yield (pool === null || pool === void 0 ? void 0 : pool.request().execute('getAllTasks'));
-        res.status(200).json({
-            tasks: tasks === null || tasks === void 0 ? void 0 : tasks.recordset
-        });
+        res.status(200).json(tasks === null || tasks === void 0 ? void 0 : tasks.recordset);
     }
     catch (error) {
         res.status(500).json('something went wrong');
@@ -92,6 +90,10 @@ const deleteTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.deleteTask = deleteTask;
 const addTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { title, description, date } = req.body;
+    console.log('heloooooooooo');
+    console.log(title);
+    console.log(description);
+    console.log(date);
     try {
         const pool = yield (0, connect_db_1.connectDB)();
         const task = yield (pool === null || pool === void 0 ? void 0 : pool.request().input('title', mssql_1.default.VarChar, title).input('description', mssql_1.default.VarChar, description).input('date', mssql_1.default.VarChar, date).execute('addTask'));

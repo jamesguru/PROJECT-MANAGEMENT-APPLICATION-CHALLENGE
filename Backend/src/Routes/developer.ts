@@ -6,7 +6,7 @@ import { VerifyToken } from '../Middlewares/Verifytoken';
 const router = Router();
 
 
-router.get("/",VerifyToken,getAllDevelopers);
+router.get("/",getAllDevelopers);
 router.put("/:id",VerifyToken, assignTaskToDeveloper)
 
 

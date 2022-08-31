@@ -16,12 +16,12 @@ export const getAllTasks = async (req:Request,res:Response) => {
 
         const tasks = await pool?.request().execute('getAllTasks');
 
-        res.status(200).json({
+        res.status(200).json(
 
-            tasks:tasks?.recordset
+            tasks?.recordset
 
             
-        })
+        )
 
 
         
@@ -179,6 +179,12 @@ export const addTask = async (req:ExtendendedTask,res:Response) =>{
     const {title,description,date} = req.body;
 
    
+    console.log('heloooooooooo')
+    console.log(title)
+
+    console.log(description)
+
+    console.log(date)
 
 
     try {

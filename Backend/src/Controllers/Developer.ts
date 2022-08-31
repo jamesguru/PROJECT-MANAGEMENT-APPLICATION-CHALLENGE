@@ -12,7 +12,7 @@ try {
 
     const developers = await pool?.request().execute('getAllDevelopers');
 
-    res.status(200).json({developers:developers?.recordset})
+    res.status(200).json(developers?.recordset)
     
 } catch (error) {
 

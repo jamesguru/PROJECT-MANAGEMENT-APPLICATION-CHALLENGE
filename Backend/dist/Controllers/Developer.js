@@ -19,7 +19,7 @@ const getAllDevelopers = (req, res) => __awaiter(void 0, void 0, void 0, functio
     try {
         const pool = yield (0, connect_db_1.connectDB)();
         const developers = yield (pool === null || pool === void 0 ? void 0 : pool.request().execute('getAllDevelopers'));
-        res.status(200).json({ developers: developers === null || developers === void 0 ? void 0 : developers.recordset });
+        res.status(200).json(developers === null || developers === void 0 ? void 0 : developers.recordset);
     }
     catch (error) {
         res.status(500).json('something went wrong');
