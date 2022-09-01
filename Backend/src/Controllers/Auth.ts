@@ -58,7 +58,7 @@ export const login = async(req:Developer,res:Response) => {
 
     const {email,password} =req.body;
 
-
+    console.log('trying to login')
     
 
     try {
@@ -81,30 +81,38 @@ export const login = async(req:Developer,res:Response) => {
         const userData = user?.recordset[0] as {developer_id:string,fullname:string,email:string,password:string,assigned:string,role:string};
 
 
-        const validPassword = bcrypt.compare(password,userData.password);
+        const validPassword = bcrypt.compare(password,userData.password,(err,data) =>{
 
-        if(!validPassword){
-
-            return res.status(400).json({message:'You entered wrong password'});
-        }
+                if(data){
 
 
 
-       const {role,fullname,developer_id, ...others} = userData;
+                const {role,fullname,developer_id, ...others} = userData;
 
-       const data={ role,fullname,developer_id};
+                const data={ role,fullname,developer_id};
 
-       const token = jwt.sign(data,process.env.KEY as string,{expiresIn:'3000000000000000000000s'});
+                const token = jwt.sign(data,process.env.KEY as string,{expiresIn:'3000000000000000000000s'});
 
-       res.json({
+                res.json({
 
-        message:'Logged in',
+                    message:'Logged in',
 
-        data,
+                    data,
 
-        token
-       })
+                    token
+                })
 
+
+
+                }else{
+
+
+                    res.json({wrongPassword:"You entered wrong password"})
+                }
+            
+        });
+
+        
 
     if(error){
 

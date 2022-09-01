@@ -48,6 +48,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.register = register;
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
+    console.log('trying to login');
     try {
         const { error, value } = userValidators_1.loginSchema.validate(req.body);
         const pool = yield (0, connect_db_1.connectDB)();
@@ -56,17 +57,20 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res.status(400).json({ message: 'user is not defined' });
         }
         const userData = user === null || user === void 0 ? void 0 : user.recordset[0];
-        const validPassword = bcrypt_1.default.compare(password, userData.password);
-        if (!validPassword) {
-            return res.status(400).json({ message: 'You entered wrong password' });
-        }
-        const { role, fullname, developer_id } = userData, others = __rest(userData, ["role", "fullname", "developer_id"]);
-        const data = { role, fullname, developer_id };
-        const token = jsonwebtoken_1.default.sign(data, process.env.KEY, { expiresIn: '3000000000000000000000s' });
-        res.json({
-            message: 'Logged in',
-            data,
-            token
+        const validPassword = bcrypt_1.default.compare(password, userData.password, (err, data) => {
+            if (data) {
+                const { role, fullname, developer_id } = userData, others = __rest(userData, ["role", "fullname", "developer_id"]);
+                const data = { role, fullname, developer_id };
+                const token = jsonwebtoken_1.default.sign(data, process.env.KEY, { expiresIn: '3000000000000000000000s' });
+                res.json({
+                    message: 'Logged in',
+                    data,
+                    token
+                });
+            }
+            else {
+                res.json({ wrongPassword: "You entered wrong password" });
+            }
         });
         if (error) {
             res.status(500).json(error.details[0].message);
