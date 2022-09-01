@@ -55,6 +55,7 @@ exports.updateTask = updateTask;
 const assignTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const task_id = req.params.id;
     const { developer_id, assigned, project, email, name } = req.body;
+    console.log(developer_id, assigned, project);
     try {
         const pool = yield (0, connect_db_1.connectDB)();
         const task = yield (pool === null || pool === void 0 ? void 0 : pool.request().input('id', mssql_1.default.Int, task_id).input('dev_id', mssql_1.default.Int, developer_id).input('assigned', mssql_1.default.NVarChar, assigned).execute('assignTask'));

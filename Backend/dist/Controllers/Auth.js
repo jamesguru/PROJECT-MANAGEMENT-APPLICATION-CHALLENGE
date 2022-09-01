@@ -57,7 +57,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res.status(400).json({ message: 'user is not defined' });
         }
         const userData = user === null || user === void 0 ? void 0 : user.recordset[0];
-        const validPassword = bcrypt_1.default.compare(password, userData.password, (err, data) => {
+        bcrypt_1.default.compare(password, userData.password, (err, data) => {
             if (data) {
                 const { role, fullname, developer_id } = userData, others = __rest(userData, ["role", "fullname", "developer_id"]);
                 const data = { role, fullname, developer_id };

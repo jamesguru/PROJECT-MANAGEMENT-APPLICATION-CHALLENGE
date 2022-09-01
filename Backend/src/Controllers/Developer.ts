@@ -6,6 +6,9 @@ import mssql from 'mssql';
 
 export const getAllDevelopers = async(req:Request,res:Response) =>{
 
+
+    
+
 try {
 
     const pool = await connectDB();
@@ -30,9 +33,18 @@ try {
 export const assignTaskToDeveloper:RequestHandler<{id:string}> = async (req:Developer,res:Response) =>{
 
 
+    console.log('you hitted it')
+
+   
+
     const dev_id = req.params.id;
 
+    console.log(dev_id)
+
     const {assigned} = req.body;
+
+
+    
 
     try {
 

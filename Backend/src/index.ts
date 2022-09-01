@@ -16,7 +16,7 @@ app.use(cors());
 app.use(json());
 
 app.use('/api/tasks',taskRoute);
-app.use('/api/developers',developerRoute);
+app.use('/api/developers', developerRoute);
 app.use('/api/auth',authRoute);
 
 app.use((err:Error,req:Request,res:Response)=> {

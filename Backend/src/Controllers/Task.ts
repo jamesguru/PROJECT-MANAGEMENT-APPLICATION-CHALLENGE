@@ -100,7 +100,7 @@ export const assignTask:RequestHandler<{id:string}> = async (req:Request, res:Re
 
     const {developer_id,assigned,project,email,name} = req.body;
 
-    
+    console.log(developer_id,assigned,project)
     try {
         
         const pool = await connectDB();

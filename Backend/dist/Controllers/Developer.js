@@ -27,7 +27,9 @@ const getAllDevelopers = (req, res) => __awaiter(void 0, void 0, void 0, functio
 });
 exports.getAllDevelopers = getAllDevelopers;
 const assignTaskToDeveloper = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('you hitted it');
     const dev_id = req.params.id;
+    console.log(dev_id);
     const { assigned } = req.body;
     try {
         const pool = yield (0, connect_db_1.connectDB)();

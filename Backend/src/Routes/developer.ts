@@ -7,7 +7,7 @@ const router = Router();
 
 
 router.get("/",getAllDevelopers);
-router.put("/:id",VerifyToken, assignTaskToDeveloper)
+router.put("/:id", assignTaskToDeveloper)
 
 
 

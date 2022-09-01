@@ -5,8 +5,6 @@ import mssql, { RequestError } from 'mssql';
 import bcrypt from 'bcrypt'
 import { loginSchema, registerSchema } from '../Helpers/userValidators';
 import jwt from 'jsonwebtoken'
-import { json } from 'stream/consumers';
-import { Data } from '../interface/Data';
 
 
 
@@ -81,7 +79,7 @@ export const login = async(req:Developer,res:Response) => {
         const userData = user?.recordset[0] as {developer_id:string,fullname:string,email:string,password:string,assigned:string,role:string};
 
 
-        const validPassword = bcrypt.compare(password,userData.password,(err,data) =>{
+        bcrypt.compare(password,userData.password,(err,data) =>{
 
                 if(data){
 
